@@ -1,0 +1,6 @@
+# LIST YOUR PYTHON3 PACKAGES HERE
+
+scikit-build
+ninja
+
+Cython

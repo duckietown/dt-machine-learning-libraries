@@ -1,0 +1,7 @@
+# LIST YOUR APT PACKAGES HERE
+
+python3-pip
+cmake
+libopenblas-dev
+gcc-7
+g++-7
