@@ -1,47 +1,55 @@
-# Template: template-basic
+# dt-machine-learning-libraries
+Docker environment you can use to build CUDA-compatible Machine Learning tools and libraries for NVidia Jetson Nano boards.
 
-This template provides a boilerplate repository for developing non-ROS software
-in Duckietown.
 
-**NOTE:** If you want to develop software that uses ROS, check out
-[this template](https://github.com/duckietown/template-ros).
+## Environment
+
+The environment in which the libraries are built is the combination of host and container
+libraries. In particular,
+
+### Host Libraries:
+
+| Library   | Version       |
+| --------- | ------------- |
+| CUDA      | 10.2(.89)     |
+| CuDNN     | 8.0(.0.180)   |
+
+### Container Libraries:
+
+Check the lists `dependencies-apt.txt` and `dependencies-py3.txt` for the container libraries.
 
 
 ## How to use it
 
-### 1. Fork this repository
+The Docker image (i.e., environment) can be built on any machine (i.e., any architecture).
+The libraries build when the image is run, and this can only happen on a machine with `arm64v8` 
+architecture and with the proper version of CUDA and CuDNN installed.
 
-Use the fork button in the top-right corner of the github page to fork this template repository.
+NOTE: This Docker image DOES NOT have CUDA/CuDNN installed in it. CUDA and CuDNN are mounted
+by the `nvidia` runtime for Docker.
 
+### Build the image
 
-### 2. Create a new repository
+Build the environment image using the command:
 
-Create a new repository on github.com while
-specifying the newly forked template repository as
-a template for your new repository.
+```shell
+dts devel build
+```
 
+### Run the image (build the library)
 
-### 3. Define dependencies
+Build a library using the command:
 
-List the dependencies in the files `dependencies-apt.txt` and
-`dependencies-py3.txt` (apt packages and pip packages respectively).
+```shell
+dts devel run -L <library_name> -- -v $(pwd)/dist:/out
+```
 
+where, `library_name` is one of those available in the 
+`/launchers` directory of this repository.
+The final python wheel will be available in the directory
+`/dist` of this repository once the building has completed.
 
-### 4. Place your code
+### Where to run
 
-Place your code in the directory `/packages/` of
-your new repository.
-
-
-### 5. Setup launchers
-
-The directory `/launchers` can contain as many launchers (launching scripts)
-as you want. A default launcher called `default.sh` must always be present.
-
-If you create an executable script (i.e., a file with a valid shebang statement)
-a launcher will be created for it. For example, the script file 
-`/launchers/my-launcher.sh` will be available inside the Docker image as the binary
-`dt-launcher-my-launcher`.
-
-When launching a new container, you can simply provide `dt-launcher-my-launcher` as
-command.
+As of January 2020, it is possible to install the JetPack v4.4.1 on 
+an NVidia Jetson AGX Xavier.
