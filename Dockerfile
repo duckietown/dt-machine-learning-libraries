@@ -87,7 +87,7 @@ RUN mkdir -p packages/cupy && \
 ARG TORCHVISION_VERSION=v0.8.2
 RUN mkdir -p packages/torchvision && \
     cd packages/torchvision && \
-    git clone -b ${TORCHVISION_VERSION} https://github.com/pytorch/vision torchvision ./src
+    git clone --recursive --branch ${TORCHVISION_VERSION} https://github.com/pytorch/vision ./src
 
 # clean environment
 RUN pip3 uninstall -y dataclasses
