@@ -64,6 +64,10 @@ RUN dt-apt-install ${REPO_PATH}/dependencies-apt.txt
 COPY ./dependencies-py3.txt "${REPO_PATH}/"
 RUN pip3 install --use-feature=2020-resolver -r ${REPO_PATH}/dependencies-py3.txt
 
+# Mute the annoying warning about detach HEAD
+
+RUN git config --global advice.detachedHead false
+
 # clone libraries
 # - pyTorch
 ENV PYTORCH_RELEASE 1.7
