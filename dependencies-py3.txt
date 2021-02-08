@@ -4,3 +4,10 @@ scikit-build
 ninja
 
 Cython
+
+# Tensorflow Requirement
+setuptools 
+keras_applications 
+keras_preprocessing 
+pybind11 
+h5py==2.10.0 

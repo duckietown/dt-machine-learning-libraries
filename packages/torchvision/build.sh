@@ -31,13 +31,6 @@ export TORCH_CUDA_ARCH_LIST="5.3;6.2;7.2"
 
 printenv && echo "torchvision version = $TORCHVISION_VERSION" && echo "pillow version = $PILLOW_VERSION" && echo "TORCH_CUDA_ARCH_LIST = $TORCH_CUDA_ARCH_LIST"
 
-apt-get update && \
-apt-get install -y --no-install-recommends \
-        build-essential \
-        libjpeg-dev \
-        zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 cd "${SCRIPTPATH}/src"
 mkdir dist/
 python3 setup.py bdist_wheel

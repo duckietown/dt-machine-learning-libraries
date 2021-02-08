@@ -84,10 +84,24 @@ RUN mkdir -p packages/cupy && \
     git clone --recursive --branch "v$CUPY_VERSION" http://github.com/cupy/cupy ./src
 
 # - torchvision
-ARG TORCHVISION_VERSION=v0.8.2
+ENV TORCHVISION_VERSION v0.8.2
 RUN mkdir -p packages/torchvision && \
     cd packages/torchvision && \
     git clone --recursive --branch ${TORCHVISION_VERSION} https://github.com/pytorch/vision ./src
+
+# - tensorflow
+# bazel builder:
+ENV BAZEL_VERSION 3.1.0
+RUN mkdir -p packages/tensorflow && \
+    cd packages/tensorflow && \
+    git clone --recursive --branch "$BAZEL_VERSION" https://github.com/bazelbuild/bazel ./src/bazel
+
+
+# tensorflow builder:
+ENV TENSORFLOW_VERSION 2.3.2 
+RUN mkdir -p packages/tensorflow && \
+    cd packages/tensorflow && \
+    git clone -b daffy-2.3.2-arm64v8 https://github.com/duckietown/tensorflow ./src/tensorflow
 
 # clean environment
 RUN pip3 uninstall -y dataclasses
