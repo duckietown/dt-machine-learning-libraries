@@ -26,7 +26,7 @@ wget https://pypi.io/packages/source/p/pycuda/pycuda-2021.1.tar.gz -O pycuda.tar
 tar -xf pycuda.tar.gz --one-top-level=pycuda-extracted --strip-components 1
 # ensures numpy exists
 pip3 install numpy
-cd pycuda-extracted && python3 configure.py --cuda-root=/usr/local/cuda
+cd pycuda-extracted && python3 configure.py --cuda-root=/usr/local/cuda-10.2
 
 mkdir dist/
 python3 setup.py bdist_wheel
