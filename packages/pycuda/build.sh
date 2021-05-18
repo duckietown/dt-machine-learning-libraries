@@ -23,11 +23,13 @@ fi
 set -ex
 
 cd "${SCRIPTPATH}/src"
+
+pip3 install numpy
+python3 configure.py --cuda-root=/usr/local/cuda-10.2
+
 mkdir dist/
 python3 setup.py bdist_wheel
 cp -R dist/* /out/
-
-
 
 
 
