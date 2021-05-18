@@ -93,6 +93,12 @@ RUN mkdir -p packages/torchvision && \
     cd packages/torchvision && \
     git clone --recursive --branch ${TORCHVISION_VERSION} https://github.com/pytorch/vision ./src
 
+# - pycuda
+ENV PYCUDA_VERSION 2021.1
+RUN mkdir -p packages/pycuda && \
+    cd packages/pycuda && \
+    git clone --recursive --branch "v$PYCUDA_VERSION" https://github.com/inducer/pycuda ./src
+
 # - tensorflow
 # bazel builder:
 ENV BAZEL_VERSION 3.1.0
