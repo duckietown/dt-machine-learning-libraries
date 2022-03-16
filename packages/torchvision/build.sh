@@ -29,7 +29,13 @@ rm "/tmp/${PYTORCH_WHEEL_NAME}"
 export PILLOW_VERSION="Pillow<7"
 export TORCH_CUDA_ARCH_LIST="5.3;6.2;7.2"
 
-printenv && echo "torchvision version = $TORCHVISION_VERSION" && echo "pillow version = $PILLOW_VERSION" && echo "TORCH_CUDA_ARCH_LIST = $TORCH_CUDA_ARCH_LIST"
+#printenv && echo "torchvision version = $TORCHVISION_VERSION" && echo "pillow version = $PILLOW_VERSION" && echo "TORCH_CUDA_ARCH_LIST = $TORCH_CUDA_ARCH_LIST"
+
+# switch to gcc7
+sudo update-alternatives \
+    --install /usr/bin/gcc gcc /usr/bin/gcc-7 100 \
+    --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
+    --slave /usr/bin/gcov gcov /usr/bin/gcov-7
 
 cd "${SCRIPTPATH}/src"
 mkdir dist/
