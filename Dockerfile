@@ -113,6 +113,11 @@ RUN mkdir -p packages/tensorflow && \
     cd packages/tensorflow && \
     git clone -b daffy-2.3.2-arm64v8 https://github.com/duckietown/tensorflow ./src/tensorflow
 
+# trt_pose
+RUN mkdir -p packages/trt_pose && \
+    cd packages/trt_pose && \
+    git clone https://github.com/NVIDIA-AI-IOT/torch2trt ./src
+
 # clean environment
 RUN pip3 uninstall -y dataclasses
 
