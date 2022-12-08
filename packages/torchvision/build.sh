@@ -12,12 +12,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-set -ex
+set -eux
 
 # TO build torch vision I need pytroch first:
 # download PyTorch
 echo "Downloading PyTorch v${PYTORCH_VERSION}..."
-PYTORCH_WHEEL_NAME="torch-${PYTORCH_VERSION}-cp38-cp38-linux_aarch64.whl"
+PYTORCH_WHEEL_NAME="torch-${PYTORCH_VERSION}.cuda-cp38-cp38-linux_aarch64.whl"
 WHEEL_URL="https://duckietown-public-storage.s3.amazonaws.com/assets/python/wheels/${PYTORCH_WHEEL_NAME}"
 wget -q "${WHEEL_URL}" -O "/tmp/${PYTORCH_WHEEL_NAME}"
 # install PyTorch

@@ -62,7 +62,7 @@ RUN dt-apt-install ${REPO_PATH}/dependencies-apt.txt
 
 # install python3 dependencies
 COPY ./dependencies-py3.txt "${REPO_PATH}/"
-RUN pip3 install --use-feature=2020-resolver -r ${REPO_PATH}/dependencies-py3.txt
+RUN pip3 install -r ${REPO_PATH}/dependencies-py3.txt
 
 # Mute the annoying warning about detach HEAD
 
@@ -88,7 +88,7 @@ RUN mkdir -p packages/cupy && \
     git clone --recursive --branch "v$CUPY_VERSION" http://github.com/cupy/cupy ./src
 
 # - torchvision
-ENV TORCHVISION_VERSION v0.8.2
+ENV TORCHVISION_VERSION v0.8.1
 RUN mkdir -p packages/torchvision && \
     cd packages/torchvision && \
     git clone --recursive --branch ${TORCHVISION_VERSION} https://github.com/pytorch/vision ./src
