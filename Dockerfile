@@ -70,13 +70,13 @@ RUN git config --global advice.detachedHead false
 
 # clone libraries
 # - pyTorch
-ENV PYTORCH_RELEASE 1.7
-ENV PYTORCH_VERSION 1.7.0
+ENV PYTORCH_RELEASE 1.8
+ENV PYTORCH_VERSION 1.8.0
 RUN mkdir -p packages/pytorch && \
     cd packages/pytorch && \
     git clone --recursive --branch "v$PYTORCH_VERSION" http://github.com/pytorch/pytorch ./src && \
     cd src && \
-    wget https://gist.githubusercontent.com/dusty-nv/ce51796085178e1f38e3c6a1663a93a1/raw/9d7261584a7482e7cc0fcb08a4a232c6d023f812/pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch && \
+    wget https://gist.githubusercontent.com/dusty-nv/ce51796085178e1f38e3c6a1663a93a1/raw/4f1a0f948150c91f877aa38075835df748c81fe5/pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch && \
     git apply pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch && \
     rm pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch
 RUN pip3 install -r packages/pytorch/src/requirements.txt
@@ -88,7 +88,7 @@ RUN mkdir -p packages/cupy && \
     git clone --recursive --branch "v$CUPY_VERSION" http://github.com/cupy/cupy ./src
 
 # - torchvision
-ENV TORCHVISION_VERSION v0.8.1
+ENV TORCHVISION_VERSION v0.9.0
 RUN mkdir -p packages/torchvision && \
     cd packages/torchvision && \
     git clone --recursive --branch ${TORCHVISION_VERSION} https://github.com/pytorch/vision ./src
@@ -108,7 +108,7 @@ RUN mkdir -p packages/tensorflow && \
 
 
 # tensorflow builder:
-ENV TENSORFLOW_VERSION 2.3.2 
+ENV TENSORFLOW_VERSION 2.3.2
 RUN mkdir -p packages/tensorflow && \
     cd packages/tensorflow && \
     git clone -b daffy-2.3.2-arm64v8 https://github.com/duckietown/tensorflow ./src/tensorflow
