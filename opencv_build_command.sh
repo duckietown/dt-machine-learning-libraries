@@ -1,0 +1,1 @@
+dts devel run --no-mount -H $XAVIER_IP -L opencv -- --gpus all --volume /home/tuxliri/out:/out
