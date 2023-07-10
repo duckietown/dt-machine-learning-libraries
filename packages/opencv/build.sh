@@ -14,6 +14,8 @@ fi
 
 set -eux
 
+echo "Installing OpenCV 4.5.0 on your Jetson Nano"
+
 # switch to gcc7
 sudo update-alternatives \
     --install /usr/bin/gcc gcc /usr/bin/gcc-7 100 \
@@ -80,16 +82,10 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D BUILD_EXAMPLES=OFF \
 -D BUILD_SHARED_LIBS=OFF ..
 
-# run make
-FREE_MEM="$(free -m | awk '/^Swap/ {print $2}')"
-# Use "-j 4" only swap space is larger than 3.5GB
-if [[ "FREE_MEM" -gt "3500" ]]; then
-  NO_JOB=4
-else
-  echo "Due to limited swap, make only uses 1 core"
-  NO_JOB=1
-fi
-make -j ${NO_JOB} 
+
+make -j 8
+
+ls /usr/opencv
 
 sudo rm -r /usr/include/opencv4/opencv2
 sudo make install
@@ -100,10 +96,9 @@ make clean
 
 echo "Testing OpenCV python CUDA support"
 
-python3 -c "import cv2; print(cv2.cuda.getCudaEnabledDeviceCount())"
-
 echo "Copying the files from the install directory to the output volume"
-cp -R /usr/opencv/* /out/
+sudo cp -r /usr/opencv/* ${OUTPUT_DIR}/
+sudo cp -r lib/python3.8/dist-packages/cv2/python-3.8 ${OUTPUT_DIR}/lib/python3.8/dist-packages/cv2
 
 echo "Congratulations!"
 echo "You've successfully installed OpenCV 4.5.0 on your Jetson Nano"
