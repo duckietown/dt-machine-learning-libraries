@@ -24,7 +24,9 @@ sudo update-alternatives \
 
 sudo sh -c "echo '/usr/local/cuda/lib64' >> /etc/ld.so.conf.d/nvidia-tegra.conf"
 sudo ldconfig
-
+mkdir -p /usr/opencv
+touch /usr/opencv/test.txt
+sudo cp -r /usr/opencv/* ${OUTPUT_DIR}/
 
 # remove old versions or previous builds
 cd ~ 
@@ -49,7 +51,7 @@ cd build
 
 # run cmake
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CMAKE_INSTALL_PREFIX=/usr/opencv \
+-D CMAKE_INSTALL_PREFIX=/opt/opencv \
 -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
 -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
 -D WITH_OPENCL=OFF \
@@ -85,19 +87,20 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 
 make -j 8
 
-ls /usr/opencv
-
 sudo rm -r /usr/include/opencv4/opencv2
+sudo ls /opt/opencv
+
 sudo make install
 sudo ldconfig
 
 # cleaning (frees 300 MB)
-make clean
+# make clean
 
 echo "Testing OpenCV python CUDA support"
 
 echo "Copying the files from the install directory to the output volume"
-sudo cp -r /usr/opencv/* ${OUTPUT_DIR}/
+sudo ls /opt/opencv
+sudo cp -r /opt/opencv/* ${OUTPUT_DIR}/
 sudo cp -r lib/python3.8/dist-packages/cv2/python-3.8 ${OUTPUT_DIR}/lib/python3.8/dist-packages/cv2
 
 echo "Congratulations!"
