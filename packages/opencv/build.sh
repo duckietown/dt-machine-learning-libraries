@@ -24,9 +24,6 @@ sudo update-alternatives \
 
 sudo sh -c "echo '/usr/local/cuda/lib64' >> /etc/ld.so.conf.d/nvidia-tegra.conf"
 sudo ldconfig
-mkdir -p /usr/opencv
-touch /usr/opencv/test.txt
-sudo cp -r /usr/opencv/* ${OUTPUT_DIR}/
 
 # remove old versions or previous builds
 cd ~ 
@@ -48,6 +45,8 @@ rm opencv_contrib.zip
 cd ~/opencv
 mkdir build
 cd build
+sudo mkdir /opt/opencv
+sudo ls /opt/opencv
 
 # run cmake
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
