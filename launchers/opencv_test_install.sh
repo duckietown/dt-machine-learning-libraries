@@ -12,7 +12,7 @@ dt-launchfile-init
 # NOTE: Use `dt-exec COMMAND` to run the main process (blocking process)
 
 # launching app
-dt-exec "${DT_REPO_PATH}"/packages/torchvision/build.sh
+dt-exec "${DT_REPO_PATH}"/packages/opencv_test_install/test.sh
 
 # ----------------------------------------------------------------------------
 # YOUR CODE ABOVE THIS LINE

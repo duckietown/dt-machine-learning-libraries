@@ -8,7 +8,7 @@ ARG ICON="cube"
 # ==================================================>
 # ==> Do not change the code below this line
 ARG ARCH=arm32v7
-ARG DISTRO=daffy
+ARG DISTRO=ente
 ARG BASE_TAG=${DISTRO}-${ARCH}
 ARG BASE_IMAGE=dt-commons
 ARG LAUNCHER=default
@@ -128,6 +128,7 @@ COPY ./packages "${REPO_PATH}/packages"
 COPY ./launchers/. "${LAUNCH_PATH}/"
 COPY ./launchers/default.sh "${LAUNCH_PATH}/"
 RUN dt-install-launchers "${LAUNCH_PATH}"
+
 
 # define default command
 CMD ["bash", "-c", "dt-launcher-${DT_LAUNCHER}"]
