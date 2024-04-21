@@ -136,6 +136,13 @@ RUN mkdir -p packages/trt_pose && \
     cd packages/trt_pose && \
     git clone https://github.com/NVIDIA-AI-IOT/torch2trt ./src
 
+# - OpenCV
+# Release #80 corresponds to v4.9.0.80 (https://github.com/opencv/opencv-python/releases)
+ENV OPENCV_VERSION 80
+RUN mkdir -p packages/opencv && \
+    cd packages/opencv && \
+    git clone -b ${OPENCV_VERSION} --depth 1 --recurse-submodules --shallow-submodules https://github.com/opencv/opencv-python ./src
+
 # clean environment
 RUN pip3 uninstall -y dataclasses
 
