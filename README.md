@@ -41,7 +41,7 @@ dts devel build
 Build a library using the command:
 
 ```shell
-dts devel run -L <library_name> -- -v $(pwd)/dist:/out
+dts devel run -L <library_name> --no-mount -- -v $(pwd)/dist:/out
 ```
 
 where, `library_name` is one of those available in the 

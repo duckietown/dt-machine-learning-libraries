@@ -1,10 +1,11 @@
 # LIST YOUR APT PACKAGES HERE
 
-python3-pip
 cmake
 libopenblas-dev
-gcc-7
-g++-7
+
+# DISABLED in ubuntu:noble
+#gcc-7
+#g++-7
 
 # Torchvision
 libjpeg-dev
@@ -31,3 +32,11 @@ libblas-dev
 gfortran
 liblapack-dev
 python3-h5py
+
+# OpenCV
+libavformat-dev
+libswscale-dev
+libavcodec-dev
+libavutil-dev
+libgstreamer1.0-dev
+libgstreamer-plugins-base1.0-dev
