@@ -83,9 +83,7 @@ ENV PIP_INDEX_URL=${PIP_INDEX_URL}
 COPY ./dependencies-py3.* "${PROJECT_PATH}/"
 RUN dt-pip3-install "${PROJECT_PATH}/dependencies-py3.*"
 
-
-# Mute the annoying warning about detach HEAD
-
+# mute warning about detach HEAD
 RUN git config --global advice.detachedHead false
 
 # clone libraries
@@ -98,8 +96,8 @@ RUN mkdir -p packages/pytorch && \
     cd src && \
     wget https://gist.githubusercontent.com/dusty-nv/ce51796085178e1f38e3c6a1663a93a1/raw/9d7261584a7482e7cc0fcb08a4a232c6d023f812/pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch && \
     git apply pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch && \
-    rm pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch
-RUN pip3 install -r packages/pytorch/src/requirements.txt
+    rm pytorch-${PYTORCH_RELEASE}-jetpack-${JETPACK_VERSION}.patch &&  \
+    pip3 install -r ./requirements.txt
 
 # - CuPy
 ENV CUPY_VERSION 8.0.0
@@ -128,7 +126,7 @@ RUN mkdir -p packages/tensorflow && \
 
 
 # tensorflow builder:
-ENV TENSORFLOW_VERSION 2.3.2 
+ENV TENSORFLOW_VERSION 2.3.2
 RUN mkdir -p packages/tensorflow && \
     cd packages/tensorflow && \
     git clone -b daffy-2.3.2-arm64v8 https://github.com/duckietown/tensorflow ./src/tensorflow
